@@ -43,7 +43,7 @@
       flex: 1;
       max-width: 4.6rem;
       max-height: 2.2rem;
-      margin-left: 1.8rem;
+      /*margin-left: 1.8rem;*/
       font-size: 0;
       line-height: 3.2rem;
       color: #00b600;
@@ -64,7 +64,7 @@
   li {
     display: inline-block;
     font-size: 1.6rem;
-    margin-left: 1.2rem;
+    margin-right: 1.2rem;
   }
 
   .talion{
@@ -74,7 +74,6 @@
     width: 2.4rem;
     height: 1.8rem;
     margin-top: 0.4rem;
-    margin-left: 1rem;
   }
 
   }
