@@ -1,47 +1,53 @@
 <template>
   <div class="home-view has-header">
     <sub-nav model="quickNav" class="subnav"></sub-nav>
-
-    <!--<infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">-->
-      <!--<loading slot="spinner"></loading>-->
-    <!--</infinite-loading>-->
+    <list model="thumbnail" :items="events"></list>
+    <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading">
+      <loading slot="spinner"></loading>
+    </infinite-loading>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import { mapState, mapActions } from 'vuex'
+
   import  SubNav from '../components/SubNav.vue'
   import  InfiniteLoading from 'vue-infinite-loading'
   import  Loading from '../components/Loading.vue'
+  import  List from '../components/List.vue'
 
   export default{
+    name: 'home-page',
     components: {
       subNav: SubNav,
       InfiniteLoading,
-      Loading
+      Loading,
+      List
     },
     computed: {
-
+      ...mapState({
+        events: state => state.activities.events
+      })
     },
     data() {
       return {
-        list: [],
+
       };
     },
     methods: {
-      onInfinite: function () {
-        var that = this
+      onInfinite () {
         setTimeout(() => {
-          const temp = [];
-          for (let i = this.list.length + 1; i <= this.list.length + 20; i++) {
-            temp.push(i);
-          }
-          this.list = this.list.concat(temp);
-          that.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
-        }, 3000)
-      }
+          this.loadMore()
+          this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
+        }, 1000)
+      },
+      ...mapActions([
+        'loadMore',
+        'getEvent'
+      ])
     },
     created() {
-
+//      this.loadMore()
     }
   }
 </script>
