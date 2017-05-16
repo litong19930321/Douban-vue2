@@ -44,7 +44,12 @@
             <li>{{ eventItem.owner.name }}</li>
           </ul>
         </div>
-
+        <tags v-if="eventItem.tags" :items="eventItem.tags | tagsArray"></tags>
+        <div class="desc">
+          <div class="title">活动详情</div>
+          <div v-if="eventItem.content" class="content" v-html="content"></div>
+        </div>
+        <download-app></download-app>
       </div>
     </template>
     <loading v-show="showLoading"></loading>
@@ -56,11 +61,15 @@
 
   import Banner from '../components/Banner.vue'
   import Loading from '../components/Loading.vue'
+  import Tags from '../components/Tags.vue'
+  import DownloadApp from '../components/DownloadApp.vue'
 
   export default  {
     components: {
       Banner,
-      Loading
+      Loading,
+      Tags,
+      DownloadApp
     },
     data() {
       return {
@@ -83,6 +92,11 @@
       }).then( res => {
         this.showLoading = false
       })
+    },
+    filters: {
+      tagsArray: function (tags) {
+        return tags.split(',')
+      }
     }
   }
 </script>
@@ -134,6 +148,21 @@
 
       }
 
+    }
+
+    .desc {
+      margin-top: 1rem;
+
+      .title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: green;
+        margin-bottom: 1.5rem;
+      }
+
+      .content {
+        font-size: 1.4rem;
+      }
     }
 }
 </style>

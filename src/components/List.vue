@@ -49,6 +49,7 @@
       display: block;
       padding: 2.5rem 1.8rem 2.5rem 0;
       margin-left: 1.8rem;
+      border-bottom: 0.1rem solid #dedede;
     }
 
     .content {
