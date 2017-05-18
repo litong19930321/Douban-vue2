@@ -21,7 +21,7 @@
 
 <style lang="scss" scoped>
   .download-app{
-    margin-top: 2rem;
+    margin-top: 5rem;
     display: flex;
     flex-direction: column;
     align-items:  center;
