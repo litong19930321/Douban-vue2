@@ -5,11 +5,14 @@
       <a href="#">更多</a>
     </div>
     <div class="content">
+      <slot name="promItem"></slot>
       <ul class="hasCover" v-if="type === 'hasCover' ">
         <li v-for="item in items">
           <router-link :to=" 'subject/' + item.id" append>
             <img v-if="item.images" :src="item.images.large" alt="">
             <span class="title">{{ item.title }}</span>
+            <rating v-if="item.rating" :rating="item.rating">
+            </rating>
           </router-link>
         </li>
       </ul>
@@ -23,7 +26,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
+import Rating from './Rating.vue'
+
+export default {
+    components: {
+      Rating
+    },
     props: {
       title: {
         type: String,
@@ -65,6 +73,7 @@
   .hasCover {
     display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
     text-align: center;
     padding-right: 1rem;
@@ -87,11 +96,11 @@
       display: inline-block;
       width: 10rem;
       margin-left: 1rem;
-
     }
 
     li:first-child {
       padding-left: 0.8rem;
+      /*overflow: hidden;*/
     }
 
     li:last-child {
